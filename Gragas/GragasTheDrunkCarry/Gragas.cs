@@ -125,58 +125,54 @@ namespace GragasTheDrunkCarry
                 {
                     Items.UseItem(3128, target);
                 }
-                else
+
+                if (Config.Item("UseQ").GetValue<bool>() && Q.IsReady() && ((Environment.TickCount - LastMove) > 50))
                 {
-                    if (Config.Item("UseQ").GetValue<bool>() && Q.IsReady() && ((Environment.TickCount - LastMove) > 50))
-                    {
-                        Qcast(vTarget);
-                        LastMove = Environment.TickCount;
-                    }
-
-                    else
-                    {
-                        if (E.IsReady() && Player.Distance(vTarget) <= E.Range && Config.Item("UseE").GetValue<bool>() && ((Environment.TickCount - LastMove) > 50))
-                        {
-                            E.Cast(vTarget, true);
-                            LastMove = Environment.TickCount;
-                        }
-                        else
-                        {
-                            if (Config.Item("UseW").GetValue<bool>() && W.IsReady() && ((Environment.TickCount - LastMove) > 50))
-                            {
-                                W.Cast();
-                                LastMove = Environment.TickCount;
-                            }
-                            else
-                            {
-                                if (Config.Item("UseR").GetValue<bool>() && R.IsReady() && GetCDamage(vTarget) >= vTarget.Health && ((Environment.TickCount - LastMove) > 50))
-                                {
-                                    R.Cast(vTarget);
-                                    LastMove = Environment.TickCount;
-                                }
-                            }
-                        }
-                    }
-
-
-
+                    Qcast(vTarget);
+                    LastMove = Environment.TickCount;
                 }
 
 
+                if (E.IsReady() && Player.Distance(vTarget) <= E.Range && Config.Item("UseE").GetValue<bool>() && ((Environment.TickCount - LastMove) > 50))
+                {
+                    E.Cast(vTarget, true);
+                    LastMove = Environment.TickCount;
+                }
+
+                if (Config.Item("UseW").GetValue<bool>() && W.IsReady() && ((Environment.TickCount - LastMove) > 50))
+                {
+                    W.Cast();
+                    LastMove = Environment.TickCount;
+                }
+
+                if (Config.Item("UseR").GetValue<bool>() && R.IsReady() && GetCDamage(vTarget) >= vTarget.Health && ((Environment.TickCount - LastMove) > 50))
+                {
+                    R.Cast(vTarget);
+                    LastMove = Environment.TickCount;
+                }
+
+
+
+
+
+
+
+
+
             }
+
             if (Orbwalker.ActiveMode.ToString().ToLower() == "mixed")
             {
                 if (Config.Item("UseQH").GetValue<bool>() && Q.IsReady())
                 {
                     Qcast(vTarget);
                 }
-                else
+
+                if (Config.Item("UseEH").GetValue<bool>() && E.IsReady() && Player.Distance(vTarget) <= E.Range)
                 {
-                    if (Config.Item("UseEH").GetValue<bool>() && E.IsReady() && Player.Distance(vTarget) <= E.Range)
-                    {
-                        E.Cast(vTarget, true);
-                    }
+                    E.Cast(vTarget, true);
                 }
+
             }
 
 
@@ -329,28 +325,25 @@ namespace GragasTheDrunkCarry
                 }
             }
 
-            else
+            if (E.IsReady() && Config.Item("JE").GetValue<bool>() && ((Environment.TickCount - LastMove) > 50))
             {
-                if (E.IsReady() && Config.Item("JE").GetValue<bool>() && ((Environment.TickCount - LastMove) > 50))
+                if (minion.IsValidTarget(E.Range))
                 {
-                    if (minion.IsValidTarget(E.Range))
-                    {
-                        E.Cast(minion.Position);
-                        LastMove = Environment.TickCount;
-                    }
-                }
-
-                else
-                {
-                    if (W.IsReady() && Config.Item("JW").GetValue<bool>() && ((Environment.TickCount - LastMove) > 50))
-                    {
-                        W.Cast();
-                        LastMove = Environment.TickCount;
-                    }
+                    E.Cast(minion.Position);
+                    LastMove = Environment.TickCount;
                 }
             }
 
-        }
+
+            if (W.IsReady() && Config.Item("JW").GetValue<bool>() && ((Environment.TickCount - LastMove) > 50))
+            {
+                W.Cast();
+                LastMove = Environment.TickCount;
+            }
+
+        } 
+
+    
 
         public static void WaveClear()
         {
@@ -365,26 +358,24 @@ namespace GragasTheDrunkCarry
                 }
             }
 
-            else
-            {
-                if (E.IsReady() && Config.Item("WE").GetValue<bool>() && ((Environment.TickCount - LastMove) > 50))
-                {
-                    if (minion.IsValidTarget(E.Range))
-                    {
-                        E.Cast(minion.Position);
-                        LastMove = Environment.TickCount;
-                    }
-                }
 
-                else
+            if (E.IsReady() && Config.Item("WE").GetValue<bool>() && ((Environment.TickCount - LastMove) > 50))
+            {
+                if (minion.IsValidTarget(E.Range))
                 {
-                    if (W.IsReady() && Config.Item("WW").GetValue<bool>() && ((Environment.TickCount - LastMove) > 50))
-                    {
-                        W.Cast();
-                        LastMove = Environment.TickCount;
-                    }
+                    E.Cast(minion.Position);
+                    LastMove = Environment.TickCount;
                 }
             }
+
+
+            if (W.IsReady() && Config.Item("WW").GetValue<bool>() && ((Environment.TickCount - LastMove) > 50))
+            {
+                W.Cast();
+                LastMove = Environment.TickCount;
+            }
+
+
 
         }
 
