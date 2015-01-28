@@ -65,8 +65,6 @@ namespace GragasTheDrunkCarry
             Config.AddSubMenu(new Menu("Harras", "Harras"));
             Config.SubMenu("Harras").AddItem(new MenuItem("UseQH", "Use Q?").SetValue(true));
             Config.SubMenu("Harras").AddItem(new MenuItem("UseEH", "Use E?").SetValue(true));
-            Config.AddSubMenu(new Menu("Items", "Items"));
-            Config.SubMenu("Items").AddItem(new MenuItem("UseDFG", "Use DFG?").SetValue(true));
             Config.AddSubMenu(new Menu("Draw", "Draw"));
             Config.SubMenu("Draw").AddItem(new MenuItem("DrawIN", "Draw Insec Pos?").SetValue(true));
             Config.SubMenu("Draw").AddItem(new MenuItem("DrawQ", "Draw Q range").SetValue(true));
@@ -121,10 +119,6 @@ namespace GragasTheDrunkCarry
             }
             if (Orbwalker.ActiveMode.ToString().ToLower() == "combo")
             {
-                if (Config.Item("UseDFG").GetValue<bool>() && Items.CanUseItem(3128) && Items.HasItem(3128))
-                {
-                    Items.UseItem(3128, target);
-                }
 
                 if (Config.Item("UseQ").GetValue<bool>() && Q.IsReady() && ((Environment.TickCount - LastMove) > 50))
                 {
