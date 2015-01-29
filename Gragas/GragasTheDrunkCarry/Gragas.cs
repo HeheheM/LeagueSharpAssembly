@@ -239,7 +239,7 @@ namespace GragasTheDrunkCarry
         public static void Insec(Obj_AI_Hero target)
         {
             Rpos = Player.Position.To2D().Extend(target.Position.To2D(), Player.Distance(target) + 250);
-            if (Rpos.Distance(Player.Position) <= R.Range)
+            if (Rpos.Distance(Player.Position) < R.Range-20)
             {
                 if (Player.Distance(Rpos.Extend(target.Position.To2D(), 700 - target.Distance(Rpos))) < E.Range && !IsWall(Rpos.To3D()) && target.IsFacing(Player))
                 {
