@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
@@ -76,7 +76,7 @@ namespace GragasTheDrunkCarry
 
 
             Player = ObjectManager.Player;
-            Game.OnGameUpdate += Game_OnGameUpdate;
+            Game.OnUpdate += Game_OnGameUpdate;
             Drawing.OnEndScene += Drawing_OnEndScene;
             GameObject.OnCreate += OnCreateObject;
             GameObject.OnDelete += GameObject_OnDelete;
